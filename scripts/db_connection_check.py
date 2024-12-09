@@ -1,0 +1,1 @@
+# scripts/db_connection_check.py
