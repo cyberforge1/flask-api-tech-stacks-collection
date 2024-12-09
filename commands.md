@@ -31,8 +31,16 @@ python scripts/db_data_collection_and_export.py
 python scripts/test_api_endpoints.py
 
 
+# Testing
 
+pytest
 
+pytest tests/routes
 
+pytest tests/routes/test_todos.py
+
+pytest --cov=app tests/
+
+pytest --cov=app --cov-report=html tests/
 
 

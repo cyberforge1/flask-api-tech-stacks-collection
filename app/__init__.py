@@ -10,13 +10,14 @@ from .config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 
-def create_app():
+def create_app(config_class=Config):
     """Application factory for creating Flask app instances."""
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     # Validate configuration
-    Config.validate()
+    if hasattr(config_class, "validate"):
+        config_class.validate()
 
     print("DEBUG (create_app): SQLALCHEMY_DATABASE_URI in config:", app.config.get("SQLALCHEMY_DATABASE_URI"))
 
@@ -33,7 +34,8 @@ def create_app():
         version='1.0',
         title='Todo Management API',
         description='API documentation for Todo Management System',
-        doc='/api/docs'  # Swagger UI available at /api/docs
+        doc='/api/docs',  # Swagger UI available at /api/docs
+        strict_slashes=False  # Disable strict slash enforcement globally
     )
 
     # Import and register namespaces

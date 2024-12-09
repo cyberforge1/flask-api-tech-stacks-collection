@@ -16,3 +16,9 @@ class Config:
                 "SQLALCHEMY_DATABASE_URI is not set. Ensure it's defined in the .env file "
                 "or as an environment variable. Check the .env file's location and syntax."
             )
+
+class TestingConfig(Config):
+    """Configuration for testing."""
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"  # Use in-memory SQLite database
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
