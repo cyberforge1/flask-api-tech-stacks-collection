@@ -20,7 +20,10 @@ def create_app():
 
     print("DEBUG (create_app): SQLALCHEMY_DATABASE_URI in config:", app.config.get("SQLALCHEMY_DATABASE_URI"))
 
+    # Enable Cross-Origin Resource Sharing (CORS)
     CORS(app)
+
+    # Initialize database and migrations
     db.init_app(app)
     migrate.init_app(app, db)
 
@@ -34,11 +37,13 @@ def create_app():
     )
 
     # Import and register namespaces
-    from .routes.todos import todos_bp
+    from .routes.main import main_bp
     from .routes.helloworld import helloworld_bp
+    from .routes.todos import todos_bp
 
     # Register namespaces with specific paths
-    api.add_namespace(helloworld_bp, path='/api')
-    api.add_namespace(todos_bp, path='/api/todos')
+    api.add_namespace(main_bp, path='/api')  # Main route
+    api.add_namespace(helloworld_bp, path='/api/helloworld')  # Hello World route
+    api.add_namespace(todos_bp, path='/api/todos')  # Todos routes
 
     return app
