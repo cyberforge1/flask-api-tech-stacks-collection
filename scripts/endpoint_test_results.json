@@ -21,10 +21,6 @@
         "status_code": 200,
         "response": [
             {
-                "id": 2,
-                "title": "Second task"
-            },
-            {
                 "id": 3,
                 "title": "Third task"
             },
@@ -67,6 +63,22 @@
             {
                 "id": 13,
                 "title": "Sample Todo"
+            },
+            {
+                "id": 14,
+                "title": "Sample Todo"
+            },
+            {
+                "id": 15,
+                "title": "Sample Todo"
+            },
+            {
+                "id": 16,
+                "title": "Sample Todo"
+            },
+            {
+                "id": 17,
+                "title": "Sample Todo"
             }
         ]
     },
@@ -77,34 +89,34 @@
         "response": {
             "message": "Todo created",
             "todo": {
-                "id": 14,
+                "id": 18,
                 "title": "Sample Todo"
             }
         }
     },
     "single_todo": {
-        "url": "http://localhost:5001/api/todos/2/",
+        "url": "http://localhost:5001/api/todos/3/",
         "method": "GET",
         "status_code": 200,
         "response": {
-            "id": 2,
-            "title": "Second task"
+            "id": 3,
+            "title": "Third task"
         }
     },
     "update_todo": {
-        "url": "http://localhost:5001/api/todos/2/",
+        "url": "http://localhost:5001/api/todos/3/",
         "method": "PUT",
         "status_code": 200,
         "response": {
             "message": "Todo updated",
             "todo": {
-                "id": 2,
+                "id": 3,
                 "title": "Updated Todo"
             }
         }
     },
     "delete_todo": {
-        "url": "http://localhost:5001/api/todos/2/",
+        "url": "http://localhost:5001/api/todos/3/",
         "method": "DELETE",
         "status_code": 200,
         "response": {

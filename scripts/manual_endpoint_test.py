@@ -13,9 +13,9 @@ ENDPOINTS = [
     {"name": "helloworld", "url": f"{BASE_URL}/helloworld/", "method": "GET"},
     {"name": "todos_list", "url": f"{BASE_URL}/todos/", "method": "GET"},
     {"name": "create_todo", "url": f"{BASE_URL}/todos/", "method": "POST", "data": {"title": "Sample Todo"}},
-    {"name": "single_todo", "url": f"{BASE_URL}/todos/2/", "method": "GET"},
-    {"name": "update_todo", "url": f"{BASE_URL}/todos/2/", "method": "PUT", "data": {"title": "Updated Todo"}},
-    {"name": "delete_todo", "url": f"{BASE_URL}/todos/2/", "method": "DELETE"},
+    {"name": "single_todo", "url": f"{BASE_URL}/todos/3/", "method": "GET"},
+    {"name": "update_todo", "url": f"{BASE_URL}/todos/3/", "method": "PUT", "data": {"title": "Updated Todo"}},
+    {"name": "delete_todo", "url": f"{BASE_URL}/todos/3/", "method": "DELETE"},
 ]
 
 # Output file for results
