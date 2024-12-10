@@ -1,7 +1,5 @@
 # scripts/db_connection_check.py
 
-# scripts/db_connection_check.py
-
 import os
 from sqlalchemy import create_engine, text, inspect
 from dotenv import load_dotenv

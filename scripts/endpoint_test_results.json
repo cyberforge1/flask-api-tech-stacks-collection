@@ -1,0 +1,114 @@
+{
+    "main": {
+        "url": "http://localhost:5001/api/",
+        "method": "GET",
+        "status_code": 200,
+        "response": {
+            "message": "Welcome to the Todo Management API!"
+        }
+    },
+    "helloworld": {
+        "url": "http://localhost:5001/api/helloworld/",
+        "method": "GET",
+        "status_code": 200,
+        "response": {
+            "message": "Hello, World!"
+        }
+    },
+    "todos_list": {
+        "url": "http://localhost:5001/api/todos/",
+        "method": "GET",
+        "status_code": 200,
+        "response": [
+            {
+                "id": 2,
+                "title": "Second task"
+            },
+            {
+                "id": 3,
+                "title": "Third task"
+            },
+            {
+                "id": 4,
+                "title": "New Todo"
+            },
+            {
+                "id": 5,
+                "title": "New Todo"
+            },
+            {
+                "id": 6,
+                "title": "New Todo"
+            },
+            {
+                "id": 7,
+                "title": "testing"
+            },
+            {
+                "id": 8,
+                "title": "does this work"
+            },
+            {
+                "id": 9,
+                "title": "testing"
+            },
+            {
+                "id": 10,
+                "title": "First task"
+            },
+            {
+                "id": 11,
+                "title": "Second task"
+            },
+            {
+                "id": 12,
+                "title": "Third task"
+            },
+            {
+                "id": 13,
+                "title": "Sample Todo"
+            }
+        ]
+    },
+    "create_todo": {
+        "url": "http://localhost:5001/api/todos/",
+        "method": "POST",
+        "status_code": 201,
+        "response": {
+            "message": "Todo created",
+            "todo": {
+                "id": 14,
+                "title": "Sample Todo"
+            }
+        }
+    },
+    "single_todo": {
+        "url": "http://localhost:5001/api/todos/2/",
+        "method": "GET",
+        "status_code": 200,
+        "response": {
+            "id": 2,
+            "title": "Second task"
+        }
+    },
+    "update_todo": {
+        "url": "http://localhost:5001/api/todos/2/",
+        "method": "PUT",
+        "status_code": 200,
+        "response": {
+            "message": "Todo updated",
+            "todo": {
+                "id": 2,
+                "title": "Updated Todo"
+            }
+        }
+    },
+    "delete_todo": {
+        "url": "http://localhost:5001/api/todos/2/",
+        "method": "DELETE",
+        "status_code": 200,
+        "response": {
+            "message": "Todo deleted"
+        }
+    }
+}

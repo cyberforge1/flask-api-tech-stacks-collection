@@ -1,70 +1,69 @@
 # scripts/manual_endpoint_test.py
 
+import os
+import json
 import requests
 
-BASE_URL = "http://127.0.0.1:5001"
+# Define the base URL of the API
+BASE_URL = "http://localhost:5001/api"
 
-def test_helloworld_endpoint():
-    print("Testing HelloWorld endpoint...")
-    response = requests.get(f"{BASE_URL}/helloworld/")
-    print("Response:", response.json())
-    print("Status Code:", response.status_code)
+# Define the endpoints to test
+ENDPOINTS = [
+    {"name": "main", "url": f"{BASE_URL}/", "method": "GET"},
+    {"name": "helloworld", "url": f"{BASE_URL}/helloworld/", "method": "GET"},
+    {"name": "todos_list", "url": f"{BASE_URL}/todos/", "method": "GET"},
+    {"name": "create_todo", "url": f"{BASE_URL}/todos/", "method": "POST", "data": {"title": "Sample Todo"}},
+    {"name": "single_todo", "url": f"{BASE_URL}/todos/2/", "method": "GET"},
+    {"name": "update_todo", "url": f"{BASE_URL}/todos/2/", "method": "PUT", "data": {"title": "Updated Todo"}},
+    {"name": "delete_todo", "url": f"{BASE_URL}/todos/2/", "method": "DELETE"},
+]
 
-def test_main_endpoint():
-    print("\nTesting Main endpoint...")
-    response = requests.get(f"{BASE_URL}/main/")
-    print("Response:", response.json())
-    print("Status Code:", response.status_code)
+# Output file for results
+OUTPUT_FILE = os.path.join(os.path.dirname(__file__), "endpoint_test_results.json")
 
-def test_todos_endpoints():
-    print("\nTesting Todos endpoints...")
+# Function to make requests and collect responses
+def test_endpoints():
+    results = {}
+    
+    for endpoint in ENDPOINTS:
+        name = endpoint["name"]
+        url = endpoint["url"]
+        method = endpoint["method"]
+        data = endpoint.get("data", None)
+        
+        try:
+            if method == "GET":
+                response = requests.get(url)
+            elif method == "POST":
+                response = requests.post(url, json=data)
+            elif method == "PUT":
+                response = requests.put(url, json=data)
+            elif method == "DELETE":
+                response = requests.delete(url)
+            else:
+                raise ValueError(f"Unsupported HTTP method: {method}")
 
-    # Test GET /todos/
-    print("\nGET /todos/")
-    response = requests.get(f"{BASE_URL}/todos/")
-    print("Response:", response.json())
-    print("Status Code:", response.status_code)
+            results[name] = {
+                "url": url,
+                "method": method,
+                "status_code": response.status_code,
+                "response": response.json() if response.content else None,
+            }
+        except Exception as e:
+            results[name] = {
+                "url": url,
+                "method": method,
+                "error": str(e),
+            }
 
-    # Test POST /todos/
-    print("\nPOST /todos/")
-    new_todo = {"title": "Learn Flask"}
-    response = requests.post(f"{BASE_URL}/todos/", json=new_todo)
-    print("Response:", response.json())
-    print("Status Code:", response.status_code)
-
-    # Save the new todo ID for future tests
-    todo_id = response.json().get("todo", {}).get("id")
-
-    if todo_id:
-        # Test GET /todos/<id>/
-        print(f"\nGET /todos/{todo_id}/")
-        response = requests.get(f"{BASE_URL}/todos/{todo_id}/")
-        print("Response:", response.json())
-        print("Status Code:", response.status_code)
-
-        # Test PUT /todos/<id>/
-        print(f"\nPUT /todos/{todo_id}/")
-        updated_todo = {"title": "Learn Flask RestX"}
-        response = requests.put(f"{BASE_URL}/todos/{todo_id}/", json=updated_todo)
-        print("Response:", response.json())
-        print("Status Code:", response.status_code)
-
-        # Test DELETE /todos/<id>/
-        print(f"\nDELETE /todos/{todo_id}/")
-        response = requests.delete(f"{BASE_URL}/todos/{todo_id}/")
-        print("Response:", response.json())
-        print("Status Code:", response.status_code)
-
-        # Test GET /todos/<id>/ after deletion
-        print(f"\nGET /todos/{todo_id}/ after deletion")
-        response = requests.get(f"{BASE_URL}/todos/{todo_id}/")
-        print("Response:", response.json())
-        print("Status Code:", response.status_code)
-
-def main():
-    test_helloworld_endpoint()
-    test_main_endpoint()
-    test_todos_endpoints()
+    return results
 
 if __name__ == "__main__":
-    main()
+    # Test endpoints and collect results
+    test_results = test_endpoints()
+
+    # Save results to a JSON file
+    with open(OUTPUT_FILE, "w") as f:
+        json.dump(test_results, f, indent=4)
+
+    print(f"Endpoint test results saved to {OUTPUT_FILE}")

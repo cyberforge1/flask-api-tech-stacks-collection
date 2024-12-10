@@ -28,7 +28,7 @@ python scripts/db_connection_check.py
 
 python scripts/db_data_collection_and_export.py
 
-python scripts/test_api_endpoints.py
+python scripts/manual_endpoint_test.py
 
 
 # Testing
