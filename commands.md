@@ -44,3 +44,11 @@ pytest --cov=app tests/
 pytest --cov=app --cov-report=html tests/
 
 
+# Migrations
+
+
+flask db upgrade
+
+flask db history
+
+flask db stamp head

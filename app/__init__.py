@@ -24,8 +24,13 @@ def create_app(config_class=Config):
     # Enable Cross-Origin Resource Sharing (CORS)
     CORS(app)
 
-    # Initialize database and migrations
+    # Initialize database
     db.init_app(app)
+
+    # Import models here to ensure they're registered with SQLAlchemy before initializing migrations
+    from .models import Todo  # Import all models here
+
+    # Initialize migrations after models are imported
     migrate.init_app(app, db)
 
     # Initialize Flask-RESTx API
