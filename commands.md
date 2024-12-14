@@ -6,9 +6,9 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip freeze > requirements.txt
-
 pip install -r requirements.txt
+
+pip freeze > requirements.txt
 
 
 # Run App
